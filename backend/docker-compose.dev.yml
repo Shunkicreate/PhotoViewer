@@ -1,5 +1,7 @@
+version: '3.8'
+
 services:
-  app-dev:
+  backend-dev:
     container_name: photo_viewer_backend_dev
     build:
       context: .
@@ -11,4 +13,11 @@ services:
     environment:
       - ENV=development
       - NAS_SERVER_PATH=${NAS_SERVER_PATH}
+      - NAS_SERVER_PORT=${NAS_SERVER_PORT}
       - BACKEND_PORT=${BACKEND_PORT}
+    networks:
+      - webnet
+
+networks:
+  webnet:
+    driver: bridge

@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  app-prod:
+  backend-prod:
     container_name: photo_viewer_backend_prod
     build:
       context: .
@@ -11,6 +11,11 @@ services:
     environment:
       - ENV=production
       - NAS_SERVER_PATH=${NAS_SERVER_PATH}
+      - NAS_SERVER_PORT=${NAS_SERVER_PORT}
+      - BACKEND_PORT=${BACKEND_PORT}
+    networks:
+      - webnet
+
 networks:
   webnet:
     external: true

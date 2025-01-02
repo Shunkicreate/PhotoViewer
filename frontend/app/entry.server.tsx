@@ -26,12 +26,6 @@ export default function handleRequest(
 ) {
   const { pathname } = new URL(request.url);
   if (pathname === "/api/folders") {
-    // ディレクトリを読み取る
-    // const folders = fs
-    //   .readdirSync(NAS_PATH, { withFileTypes: true })
-    //   .filter((dirent) => dirent.isDirectory())
-    //   .map((dirent) => dirent.name);
-
     // JSONレスポンスとしてクライアントに返す
     return new Response(null, {
       status: 200,

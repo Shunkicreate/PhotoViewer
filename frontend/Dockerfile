@@ -1,23 +1,43 @@
-# Node.jsの公式イメージをベースに使用
-FROM node:22
+# =========================
+# Stage 1: builder
+# =========================
+FROM node:22-alpine AS builder
 
-# 作業ディレクトリを設定
+# 作業ディレクトリ設定
 WORKDIR /app
 
-# 依存関係のインストールに必要なファイルを先にコピー
+# 依存関係インストール用に package*.json をコピー
 COPY package*.json ./
 
-# 開発依存関係も含めてインストール
+# devDependencies も含めてインストール（ビルドに必要なため）
 RUN npm install
 
-# アプリケーションコードをすべてコピー
+# ソースコード一式をコピー
 COPY . .
 
-# 本番用ビルドを実行
+# Remix のビルド（本番用バンドルを作成）
 RUN npm run build
 
-# ポートを公開（例：5174ポートを利用）
+# =========================
+# Stage 2: runner (本番運用用)
+# =========================
+FROM node:22-alpine AS runner
+
+# 作業ディレクトリ設定
+WORKDIR /app
+
+# package*.json をコピーして、本番用依存関係のみインストール
+COPY package*.json ./
+RUN npm ci --production
+
+# builder で生成した build/ ディレクトリ等、実行に必要な成果物だけコピー
+COPY --from=builder /app/build      /app/build
+COPY --from=builder /app/public     /app/public
+# ↑ Remix の output (build/ や public/) を適宜コピー
+#   public フォルダが存在する場合は一緒にコピーするケースが多いです
+
+# ポート公開
 EXPOSE 5174
 
-# 開発用のデフォルトコマンド
+# 本番起動コマンド（Remix App Server想定）
 CMD ["npm", "run", "start"]
