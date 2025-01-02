@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: photoviewer-backend-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: photoviewer-backend
+  template:
+    metadata:
+      labels:
+        app: photoviewer-backend
+    spec:
+      containers:
+      - name: photoviewer-backend
+        image: $(BACKEND_IMAGE)
+        ports:
+          - containerPort: $(BACKEND_TARGET_PORT)
+        env:
+          - name: ENV
+            value: "production"
+          - name: NAS_PATH
+            value: "$(NAS_PATH)"
+          - name: BACKEND_PORT
+            value: "$(BACKEND_CLUSTER_PORT)"
+        resources:
+          requests:
+            cpu: "300m"
+            memory: "256Mi"
+          limits:
+            cpu: "1000m"
+            memory: "512Mi"

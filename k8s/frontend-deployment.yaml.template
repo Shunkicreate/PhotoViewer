@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: photoviewer-frontend-deploy
+spec:
+  replicas: 1  # 初期1 (後でHPAが変更)
+  selector:
+    matchLabels:
+      app: photoviewer-frontend
+  template:
+    metadata:
+      labels:
+        app: photoviewer-frontend
+    spec:
+      containers:
+      - name: photoviewer-frontend
+        image: $(FRONTEND_IMAGE)
+        ports:
+          - containerPort: $(FRONTEND_TARGET_PORT)
+        env:
+          - name: NODE_ENV
+            value: "production"
+          - name: BACKEND_API_ADDRESS
+            value: "$(BACKEND_API_ADDRESS)"
+          # ほかに必要な環境変数があれば追加
+        resources:
+          requests:
+            cpu: "300m"
+            memory: "256Mi"
+          limits:
+            cpu: "1000m"
+            memory: "512Mi"

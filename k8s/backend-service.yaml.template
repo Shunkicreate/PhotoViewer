@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: photoviewer-backend-svc
+spec:
+  selector:
+    app: photoviewer-backend
+  ports:
+    - protocol: TCP
+      port: $(BACKEND_CLUSTER_PORT)
+      targetPort: $(BACKEND_TARGET_PORT)
+  type: ClusterIP
