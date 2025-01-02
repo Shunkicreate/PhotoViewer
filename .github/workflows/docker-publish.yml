@@ -35,7 +35,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: ./frontend               # フロントエンドのDockerfileがあるパス
-          file: ./frontend/Dockerfile.prod  # フロントエンド用Dockerfile
+          file: ./frontend/Dockerfile  # フロントエンド用Dockerfile
           push: true
           tags: shunkicreate/photoviewer-frontend:latest
           # ↑ ユーザー名/リポジトリ名:タグ
