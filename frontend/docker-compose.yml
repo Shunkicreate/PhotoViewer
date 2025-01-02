@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: photoviewer-nginx-container
+    depends_on:
+      - photoviewer
+    networks:
+      - webnet
+    environment:
+      - PORT=${PORT}          # .envファイルのPORTを使用
+
+  photoviewer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: photoviewer-container
+    networks:
+      - webnet
+    environment:
+      - NAS_PATH=${NAS_PATH}  # .envファイルのNAS_PATHを使用
+      - PORT=${PORT}          # .envファイルのPORTを使用
+      - BACKEND_API_ADDRESS=${BACKEND_API_ADDRESS} # .envファイルのBACKEND_API_ADDRESSを使用
+
+  app-prod:
+    container_name: photo_viewer_backend_prod
+    build:
+      context: ../PhotoViewerBackend
+      dockerfile: ../PhotoViewerBackend/Dockerfile.prod  # 本番環境用のDockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - webnet
+    environment:
+      - ENV=production
+      - NAS_PATH=${NAS_PATH}
+      - NAS_SERVER_PATH=${NAS_SERVER_PATH}
+      - BACKEND_PORT=${BACKEND_PORT}
+
+networks:
+  webnet:
+    driver: bridge
