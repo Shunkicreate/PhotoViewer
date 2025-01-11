@@ -16,14 +16,17 @@ spec:
       - name: photoviewer-backend
         image: $(BACKEND_IMAGE)
         ports:
-          - containerPort: $(BACKEND_TARGET_PORT)
+          - containerPort: $((BACKEND_TARGET_PORT))
         env:
           - name: ENV
             value: "production"
           - name: NAS_PATH
             value: "$(NAS_PATH)"
           - name: BACKEND_PORT
-            value: "$(BACKEND_CLUSTER_PORT)"
+            value: "$((BACKEND_CLUSTER_PORT))"
+        envFrom:
+        - secretRef:
+            name: backend-env-secret
         resources:
           requests:
             cpu: "300m"
@@ -31,5 +34,3 @@ spec:
           limits:
             cpu: "1000m"
             memory: "512Mi"
-        - secretRef:
-            name: backend-env-secret

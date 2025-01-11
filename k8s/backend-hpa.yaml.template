@@ -7,8 +7,8 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: photoviewer-backend-deploy
-  minReplicas: $(BACKEND_MIN_REPLICAS)
-  maxReplicas: $(BACKEND_MAX_REPLICAS)
+  minReplicas: $((BACKEND_MIN_REPLICAS))
+  maxReplicas: $((BACKEND_MAX_REPLICAS))
   metrics:
   - type: Resource
     resource:
