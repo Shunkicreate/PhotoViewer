@@ -22,6 +22,7 @@ spec:
             value: "production"
           - name: BACKEND_API_ADDRESS
             value: "$(BACKEND_API_ADDRESS)"
+        envFrom:
           - secretRef:
               name: front-env-secret
         resources:
