@@ -14,19 +14,22 @@ spec:
     spec:
       containers:
       - name: photoviewer-backend
-        image: $(BACKEND_IMAGE)
+        image: shunkicreate/photoviewer-backend:latest
         ports:
         - containerPort: 8080
         env:
         - name: ENV
-          value: "production"
+          value: production
         - name: NAS_PATH
-          value: "$(NAS_PATH)"
+          valueFrom:
+            secretKeyRef:
+              name: backend-env-secret
+              key: NAS_PATH
         - name: BACKEND_PORT
-          value: "$((BACKEND_CLUSTER_PORT))"
-        envFrom:
-        - secretRef:
-            name: backend-env-secret
+          valueFrom:
+            secretKeyRef:
+              name: backend-env-secret
+              key: BACKEND_PORT
         resources:
           requests:
             cpu: "300m"

@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: photoviewer-frontend-deploy
 spec:
-  replicas: 1  # 初期1 (後でHPAが変更)
+  replicas: 1
   selector:
     matchLabels:
       app: photoviewer-frontend
@@ -14,14 +14,17 @@ spec:
     spec:
       containers:
       - name: photoviewer-frontend
-        image: $(FRONTEND_IMAGE)
+        image: shunkicreate/photoviewer-frontend:latest
         ports:
           - containerPort: 3000
         env:
           - name: NODE_ENV
             value: "production"
           - name: BACKEND_API_ADDRESS
-            value: "$(BACKEND_API_ADDRESS)"
+            valueFrom:
+              secretKeyRef:
+                name: front-env-secret
+                key: BACKEND_API_ADDRESS
         envFrom:
           - secretRef:
               name: front-env-secret
