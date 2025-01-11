@@ -8,11 +8,11 @@ export $(shell sed -E 's/^([^#]*)=(.*)$/export \1="\2"/g' $(ENV_FILE))
 
 K8S_DIR = k8s
 
-.PHONY: all deploy generate-yaml apply clean
+.PHONY: all deploy apply clean
 
 all: deploy
 
-deploy: prepare-dir generate-yaml apply
+deploy: apply
 
 # 1) 生成された YAML を kubectl apply
 apply:
