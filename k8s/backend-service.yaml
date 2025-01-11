@@ -7,6 +7,6 @@ spec:
     app: photoviewer-backend
   ports:
     - protocol: TCP
-      port: $((BACKEND_CLUSTER_PORT))
-      targetPort: $((BACKEND_TARGET_PORT))
+      port: 8080
+      targetPort: 8080
   type: ClusterIP

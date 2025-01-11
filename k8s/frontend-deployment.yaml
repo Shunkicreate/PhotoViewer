@@ -22,7 +22,8 @@ spec:
             value: "production"
           - name: BACKEND_API_ADDRESS
             value: "$(BACKEND_API_ADDRESS)"
-          # ほかに必要な環境変数があれば追加
+          - secretRef:
+              name: front-env-secret
         resources:
           requests:
             cpu: "300m"
@@ -30,5 +31,3 @@ spec:
           limits:
             cpu: "1000m"
             memory: "512Mi"
-        - secretRef:
-            name: front-env-secret
