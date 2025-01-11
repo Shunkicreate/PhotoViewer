@@ -1,13 +1,10 @@
 # Makefile (プロジェクトルートに置く)
 
-# デフォルトの .env ファイルのパス
 ifndef ENV_FILE
     ENV_FILE = k8s/.env
 endif
 
-# .env の読み込み
-include $(ENV_FILE)
-export $(shell grep -v '^#' $(ENV_FILE) | xargs)
+export $(shell sed -E 's/^([^#]*)=(.*)$/export \1="\2"/g' $(ENV_FILE))
 
 # テンプレート & 出力先
 K8S_TEMPLATES_DIR = k8s
