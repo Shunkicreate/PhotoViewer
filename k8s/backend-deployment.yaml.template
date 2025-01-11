@@ -16,14 +16,14 @@ spec:
       - name: photoviewer-backend
         image: $(BACKEND_IMAGE)
         ports:
-          - containerPort: $((BACKEND_TARGET_PORT))
+        - containerPort: $((BACKEND_TARGET_PORT)) # 数値を明示
         env:
-          - name: ENV
-            value: "production"
-          - name: NAS_PATH
-            value: "$(NAS_PATH)"
-          - name: BACKEND_PORT
-            value: "$((BACKEND_CLUSTER_PORT))"
+        - name: ENV
+          value: "production"
+        - name: NAS_PATH
+          value: "$(NAS_PATH)"
+        - name: BACKEND_PORT
+          value: "$((BACKEND_CLUSTER_PORT))"
         envFrom:
         - secretRef:
             name: backend-env-secret
