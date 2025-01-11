@@ -7,12 +7,12 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: photoviewer-backend-deploy
-  minReplicas: $((BACKEND_MIN_REPLICAS))
-  maxReplicas: $((BACKEND_MAX_REPLICAS))
+  minReplicas: 1
+  maxReplicas: 5
   metrics:
   - type: Resource
     resource:
       name: cpu
       target:
         type: Utilization
-        averageUtilization: $((BACKEND_CPU_TARGET))
+        averageUtilization: 60
