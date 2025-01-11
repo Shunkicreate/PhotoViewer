@@ -20,11 +20,6 @@ spec:
         env:
         - name: ENV
           value: production
-        - name: NAS_PATH
-          valueFrom:
-            secretKeyRef:
-              name: backend-env-secret
-              key: NAS_PATH
         - name: BACKEND_PORT
           valueFrom:
             secretKeyRef:
