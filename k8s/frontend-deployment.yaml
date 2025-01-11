@@ -16,7 +16,7 @@ spec:
       - name: photoviewer-frontend
         image: $(FRONTEND_IMAGE)
         ports:
-          - containerPort: $(FRONTEND_TARGET_PORT)
+          - containerPort: 3000
         env:
           - name: NODE_ENV
             value: "production"
