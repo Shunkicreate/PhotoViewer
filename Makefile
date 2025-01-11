@@ -7,7 +7,7 @@ endif
 
 # .env の読み込み
 include $(ENV_FILE)
-export $(shell sed 's/=.*//' $(ENV_FILE))
+export $(shell grep -v '^#' $(ENV_FILE) | xargs)
 
 # テンプレート & 出力先
 K8S_TEMPLATES_DIR = k8s
