@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: photoviewer-frontend
-        image: shunkicreate/photoviewer-frontendsha256:fee8e342ddf926b573014dfccc9de8d6201c5343655288b1017d0ce211b5e313
+        image: shunkicreate/photoviewer-frontend@sha256:fee8e342ddf926b573014dfccc9de8d6201c5343655288b1017d0ce211b5e313
         ports:
           - containerPort: 3000
         env:
