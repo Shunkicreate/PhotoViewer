@@ -25,6 +25,16 @@ spec:
             secretKeyRef:
               name: backend-env-secret
               key: BACKEND_PORT
+        - name: NAS_SERVER_PATH
+          valueFrom:
+            secretKeyRef:
+              name: backend-env-secret
+              key: NAS_SERVER_PATH
+        - name: NAS_SERVER_PORT
+          valueFrom:
+            secretKeyRef:
+              name: backend-env-secret
+              key: NAS_SERVER_PORT
         resources:
           requests:
             cpu: "300m"
