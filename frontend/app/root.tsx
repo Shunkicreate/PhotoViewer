@@ -15,7 +15,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
 				<Links />
 			</head>
 			<body className='font-noto-sans-jp text-text-color bg-bg-color'>
-				{/* <Header yearListProps={yearListProps} textFieldProps={textFieldProps} /> */}
 				{children}
 				<ScrollRestoration />
 				<Scripts />
