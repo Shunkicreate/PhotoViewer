@@ -25,7 +25,7 @@ interface LoaderData {
 
 const COUNT = 16;
 const WIDTH = Math.floor(1920 / 4);
-const HEIGHT = Math.floor(1080 / 4);
+const HEIGHT = 0 // 0はアスペクト比を維持することを意味します
 const ADDRESS = process.env.BACKEND_API_ADDRESS || "";
 
 export const loader = async () => {
