@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # -----------------------------
   # 1. Remixフロントエンド (本番)
@@ -32,3 +30,7 @@ services:
     restart: always
     volumes:
       - ./nginx/nginx.prod.conf:/etc/nginx/nginx.conf:ro
+
+networks:
+  webnet:
+    external: true

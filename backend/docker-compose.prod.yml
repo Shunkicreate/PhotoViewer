@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   backend-prod:
     container_name: photo_viewer_backend_prod
