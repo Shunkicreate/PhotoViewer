@@ -70,3 +70,10 @@ compose up
 ログを見る
 `docker logs photoviewer-container`
 `docker logs photoviewer-nginx-container`
+
+# 本番環境
+## ローカルでビルドする
+```
+docker build -t shunkicreate/photoviewer-frontend:latest .
+docker push shunkicreate/photoviewer-frontend:latest
+```

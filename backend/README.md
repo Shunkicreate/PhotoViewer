@@ -22,3 +22,8 @@ docker compose -f docker-compose.prod.yml up --build
 ```
 docker compose -f docker-compose.prod.yml up
 ```
+
+## 本番用マルチステージビルド
+```
+docker buildx build --platform linux/arm64,linux/amd64 -f Dockerfile.prod -t shunkicreate/photoviewer-backend:latest --push .
+```

@@ -5,15 +5,13 @@ services:
   # 1. Remixフロントエンド (本番)
   # -----------------------------
   photoviewer_frontend:
-    build:
-      context: .
-      dockerfile: Dockerfile  # マルチステージDockerfileを指定
+    image: shunkicreate/photoviewer-frontend:latest
     container_name: photoviewer_frontend_container
     networks:
       - webnet
     environment:
-      - PORT=${PORT}                  # .envファイルのPORTを使用（Remix内部の待受ポート？）
-      - BACKEND_API_ADDRESS=${BACKEND_API_ADDRESS}  # バックエンドAPIのエンドポイント
+      - PORT=${PORT}
+      - BACKEND_API_ADDRESS=${BACKEND_API_ADDRESS}
       - NODE_ENV=production
     restart: always
 

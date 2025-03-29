@@ -1,5 +1,8 @@
-# 本番環境用ステージ
+# =========================
+# Stage 1: builder
+# =========================
 FROM golang:1.23-alpine AS builder
+ARG TARGETARCH=arm64
 
 WORKDIR /app
 
@@ -9,10 +12,12 @@ COPY . .
 # Goモジュールのインストール
 RUN go mod tidy
 
-# 本番用にバイナリをビルド
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -o api-server ./cmd/server
+# ARM64 用にバイナリをビルド
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=$TARGETARCH go build -o api-server ./cmd/server
 
-# 本番用ステージ
+# =========================
+# Stage 2: runtime
+# =========================
 FROM alpine:latest
 
 # ビルドしたバイナリをコピー

@@ -17,7 +17,7 @@ deploy: apply
 # 1) 生成された YAML を kubectl apply
 apply:
 	@echo "=== kubectl apply ==="
-	kubectl apply -f $(K8S_DIR)
+	kubectl apply -f $(K8S_DIR) --request-timeout=5m
 
 clean:
 	@rm -rf $(K8S_DIR)
